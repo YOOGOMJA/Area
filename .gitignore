@@ -1,4 +1,7 @@
 .idea/
-build/android-profile/
-
+build/
+openCVLibrary331/
 app/.externalNativeBuild/cmake/
+import-summary.txt
+.gradle
+
