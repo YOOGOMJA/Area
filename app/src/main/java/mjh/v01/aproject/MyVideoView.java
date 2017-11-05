@@ -37,17 +37,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.core.Mat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mjh.v01.aproject.VO.VideoInfo;
@@ -82,6 +82,7 @@ public class MyVideoView extends AppCompatActivity {
     String email;
     int index;
     Uri videoUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
