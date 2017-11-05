@@ -4,3 +4,4 @@ openCVLibrary331/
 app/.externalNativeBuild/
 import-summary.txt
 .gradle
+*.iml
