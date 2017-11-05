@@ -38,6 +38,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.core.Mat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +51,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import mjh.v01.aproject.VO.VideoInfo;
 
-public class MyVideoView extends AppCompatActivity {
+public class MyVideoView extends AppCompatActivity
+        implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     public static final String TAG = "MainActivity";
     private static String EXTERNAL_STORAGE_PATH = "";
@@ -78,6 +82,22 @@ public class MyVideoView extends AppCompatActivity {
     String email;
     int index;
     Uri videoUri;
+
+
+        private static final String TAG = "opencv";
+        private CameraBridgeViewBase mOpenCvCameraView;
+        private Mat matInput;
+        private Mat matResult;
+
+    public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
+
+
+    static {
+        System.loadLibrary("opencv_java3");
+        System.loadLibrary("native-lib");
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,38 +1,46 @@
 
 {
-	"buildFiles" : [ "C:/Users/jihun/dev/Aproject/app/CMakeLists.txt" ],
+	"buildFiles" : [ "/home/rjs1197/dev/Area/app/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"C:\\Users\\jihun\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\jihun\\dev\\Aproject\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target clean"
+		"/home/rjs1197/Android/Sdk/cmake/3.6.4111459/bin/cmake --build /home/rjs1197/dev/Area/app/.externalNativeBuild/cmake/release/x86_64 --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
 	{
+		"lib_opencv-Release-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "lib_opencv",
+			"buildType" : "release",
+			"output" : "/home/rjs1197/dev/Area/app/src/main/Jnilibs/x86_64/libopencv_java3.so",
+			"toolchain" : "8453824457529908125"
+		},
 		"native-lib-Release-x86_64" : 
 		{
 			"abi" : "x86_64",
 			"artifactName" : "native-lib",
-			"buildCommand" : "C:\\Users\\jihun\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\jihun\\dev\\Aproject\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target native-lib",
+			"buildCommand" : "/home/rjs1197/Android/Sdk/cmake/3.6.4111459/bin/cmake --build /home/rjs1197/dev/Area/app/.externalNativeBuild/cmake/release/x86_64 --target native-lib",
 			"buildType" : "release",
 			"files" : 
 			[
 				
 				{
-					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/Users/jihun/AppData/Local/Android/sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/Users/jihun/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dnative_lib_EXPORTS -isystem C:\\Users\\jihun\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\jihun\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86_64\\include -isystem C:\\Users\\jihun\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/jihun/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -frtti -fexceptions -O2 -DNDEBUG  -fPIC    -c ",
-					"src" : "C:/Users/jihun/dev/Aproject/app/src/main/cpp/native-lib.cpp",
-					"workingDirectory" : "C:/Users/jihun/dev/Aproject/app/.externalNativeBuild/cmake/release/x86_64"
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=/home/rjs1197/Android/Sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/linux-x86_64 --sysroot=/home/rjs1197/Android/Sdk/ndk-bundle/sysroot  -Dnative_lib_EXPORTS -I/home/rjs1197/dev/OpenCV-android-sdk/sdk/native/jni/include -isystem /home/rjs1197/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/rjs1197/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86_64/include -isystem /home/rjs1197/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem /home/rjs1197/Android/Sdk/ndk-bundle/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -O2 -DNDEBUG  -fPIC    -c ",
+					"src" : "/home/rjs1197/dev/Area/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "/home/rjs1197/dev/Area/app/.externalNativeBuild/cmake/release/x86_64"
 				}
 			],
-			"output" : "C:/Users/jihun/dev/Aproject/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so",
-			"toolchain" : "2234911569"
+			"output" : "/home/rjs1197/dev/Area/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so",
+			"toolchain" : "8453824457529908125"
 		}
 	},
 	"toolchains" : 
 	{
-		"2234911569" : 
+		"8453824457529908125" : 
 		{
-			"cCompilerExecutable" : "C:/Users/jihun/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
-			"cppCompilerExecutable" : "C:/Users/jihun/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+			"cCompilerExecutable" : "/home/rjs1197/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/home/rjs1197/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
 		}
 	}
 }
