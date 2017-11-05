@@ -13,7 +13,7 @@
 			"abi" : "mips",
 			"artifactName" : "lib_opencv",
 			"buildType" : "release",
-			"output" : "/home/rjs1197/dev/Area/app/src/main/Jnilibs/mips/libopencv_java3.so",
+			"output" : "/home/rjs1197/dev/Area/app/src/main/JniLibs/mips/libopencv_java3.so",
 			"toolchain" : "8453824457529908125"
 		},
 		"native-lib-Release-mips" : 

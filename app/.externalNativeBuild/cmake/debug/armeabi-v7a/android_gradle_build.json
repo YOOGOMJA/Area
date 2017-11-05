@@ -13,7 +13,7 @@
 			"abi" : "armeabi-v7a",
 			"artifactName" : "lib_opencv",
 			"buildType" : "debug",
-			"output" : "/home/rjs1197/dev/Area/app/src/main/Jnilibs/armeabi-v7a/libopencv_java3.so",
+			"output" : "/home/rjs1197/dev/Area/app/src/main/JniLibs/armeabi-v7a/libopencv_java3.so",
 			"toolchain" : "8453824457529908125"
 		},
 		"native-lib-Debug-armeabi-v7a" : 
