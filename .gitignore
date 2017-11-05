@@ -5,3 +5,4 @@ app/.externalNativeBuild/
 import-summary.txt
 .gradle
 *.iml
+app/CMakeLists.txt
