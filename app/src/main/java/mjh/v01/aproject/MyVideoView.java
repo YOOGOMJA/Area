@@ -37,16 +37,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Mat;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mjh.v01.aproject.VO.VideoInfo;
@@ -101,7 +102,7 @@ public class MyVideoView extends AppCompatActivity {
         }
 
         // create a SurfaceView instance and add it to the layout
-        class Preview extends SurfaceView implements SurfaceHolder.Callback {
+        /*class Preview extends SurfaceView implements SurfaceHolder.Callback {
             SurfaceHolder mHolder;
 
             Preview(Context context) {
@@ -134,8 +135,9 @@ public class MyVideoView extends AppCompatActivity {
 //                출처: http://rinear.tistory.com/entry/AndroidSurfaceView-Camera-Preview카메라-프리뷰 [괴도군의 블로그]
             }
         }
-
-        Preview surface = new Preview(this);
+*/
+//        Preview surface = new Preview(this);
+        SurfaceView surface = new SurfaceView(this);
         holder = surface.getHolder();
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
@@ -188,14 +190,14 @@ public class MyVideoView extends AppCompatActivity {
                 values.put(MediaStore.MediaColumns.MIME_TYPE, "mp4");
                 values.put(MediaStore.Audio.Media.DATA, filename);
                 videoUri = getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values);
-                        if (videoUri == null) {
-                            Log.d("SampleVideoRecorder", "Video insert failed.");
-                            Toast.makeText(MyVideoView.this, "fail", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        Log.d("Whatisthis", videoUri.getLastPathSegment());
-                        Toast.makeText(MyVideoView.this, "Success", Toast.LENGTH_SHORT).show();
-                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, videoUri));
+                if (videoUri == null) {
+                    Log.d("SampleVideoRecorder", "Video insert failed.");
+                    Toast.makeText(MyVideoView.this, "fail", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("Whatisthis", videoUri.getLastPathSegment());
+                Toast.makeText(MyVideoView.this, "Success", Toast.LENGTH_SHORT).show();
+                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, videoUri));
             }
         });
 
@@ -205,15 +207,27 @@ public class MyVideoView extends AppCompatActivity {
                     player = new MediaPlayer();
                 }
 
+
                 try {
-                    player.setDataSource(filename);
+                    FileInputStream fs = new FileInputStream(new File(filename));
+                    FileDescriptor fd = fs.getFD();
+                    player.setDataSource(fd);
+                    player.prepare();
+
+                    Log.d("FileName", filename);
                     player.setDisplay(holder);
 
-                    player.prepare();
-                    player.start();
+
+                    player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mediaPlayer) {
+                            player.start();
+                        }
+                    });
                 } catch (Exception e) {
                     Log.e(TAG, "Video play failed.", e);
                 }
+
             }
         });
 
@@ -273,12 +287,12 @@ public class MyVideoView extends AppCompatActivity {
         }
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "11111", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "11111", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "22222", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "22222", Toast.LENGTH_SHORT).show();
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-                Toast.makeText(this, "33333", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "33333", Toast.LENGTH_SHORT).show();
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 1);
             }
@@ -290,23 +304,22 @@ public class MyVideoView extends AppCompatActivity {
         if (requestCode == 1) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, permissions[i] + "44444", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, permissions[i] + "44444", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, permissions[i] + "55555", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, permissions[i] + "55555", Toast.LENGTH_SHORT).show();
                 }
             }
         }
     }
 
     private String createFilename() {
-        fileIndex++;
-        Date d= new Date();
+        Date d = new Date();
         String newFilename = "";
         if (EXTERNAL_STORAGE_PATH == null || EXTERNAL_STORAGE_PATH.equals("")) {
             // use internal memory
-            newFilename = RECORDED_FILE + d.toString() + ".mp4";
+            newFilename = RECORDED_FILE + d.toString().trim() + ".mp4";
         } else {
-            newFilename = EXTERNAL_STORAGE_PATH + "/" + RECORDED_FILE + d.toString() + ".mp4";
+            newFilename = EXTERNAL_STORAGE_PATH + "/" + RECORDED_FILE + d.toString().trim() + ".mp4";
         }
 
         return newFilename;
@@ -368,5 +381,4 @@ public class MyVideoView extends AppCompatActivity {
         intent.putExtra("email", email);
         startActivity(intent);
     }
-
 }
