@@ -357,7 +357,6 @@ public class MyVideoView extends AppCompatActivity {
     }
 
     private void updateDB() {
-        //00�� ��ǥ�ӽ�
         VideoInfo videoInfo = new VideoInfo(videoUri.getLastPathSegment(), 00);
         databaseReference.child("VIDEO").child(email).child(String.valueOf(index)).setValue(videoInfo);
         //��� push����
