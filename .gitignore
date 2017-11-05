@@ -1,6 +1,6 @@
 .idea/
 build/
 openCVLibrary331/
-app/.externalNativeBuild/cmake/
+app/.externalNativeBuild/
 import-summary.txt
 .gradle
