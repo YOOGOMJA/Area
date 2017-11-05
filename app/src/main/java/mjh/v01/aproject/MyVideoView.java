@@ -51,8 +51,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import mjh.v01.aproject.VO.VideoInfo;
 
-public class MyVideoView extends AppCompatActivity
-        implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class MyVideoView extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     private static String EXTERNAL_STORAGE_PATH = "";
@@ -82,21 +81,6 @@ public class MyVideoView extends AppCompatActivity
     String email;
     int index;
     Uri videoUri;
-
-
-        private static final String TAG = "opencv";
-        private CameraBridgeViewBase mOpenCvCameraView;
-        private Mat matInput;
-        private Mat matResult;
-
-    public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
-
-
-    static {
-        System.loadLibrary("opencv_java3");
-        System.loadLibrary("native-lib");
-    }
-
 
 
     @Override
