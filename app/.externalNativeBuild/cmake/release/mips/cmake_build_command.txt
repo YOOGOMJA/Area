@@ -1,14 +1,14 @@
-Executable : /home/rjs1197/Android/Sdk/cmake/3.6.4111459/bin/cmake
+Executable : C:\Users\jihun\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
 arguments : 
--H/home/rjs1197/dev/Area/app
--B/home/rjs1197/dev/Area/app/.externalNativeBuild/cmake/release/mips
+-HC:\Users\jihun\dev\Area\app
+-BC:\Users\jihun\dev\Area\app\.externalNativeBuild\cmake\release\mips
 -GAndroid Gradle - Ninja
 -DANDROID_ABI=mips
--DANDROID_NDK=/home/rjs1197/Android/Sdk/ndk-bundle
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/rjs1197/dev/Area/app/build/intermediates/cmake/release/obj/mips
+-DANDROID_NDK=C:\Users\jihun\AppData\Local\Android\Sdk\ndk-bundle
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\Users\jihun\dev\Area\app\build\intermediates\cmake\release\obj\mips
 -DCMAKE_BUILD_TYPE=Release
--DCMAKE_MAKE_PROGRAM=/home/rjs1197/Android/Sdk/cmake/3.6.4111459/bin/ninja
--DCMAKE_TOOLCHAIN_FILE=/home/rjs1197/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=C:\Users\jihun\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\ninja.exe
+-DCMAKE_TOOLCHAIN_FILE=C:\Users\jihun\AppData\Local\Android\Sdk\ndk-bundle\build\cmake\android.toolchain.cmake
 -DANDROID_PLATFORM=android-19
 jvmArgs : 
 
