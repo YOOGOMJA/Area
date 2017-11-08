@@ -7,7 +7,9 @@ import android.net.Uri;
  */
 
 public class VideoInfo {
+    //video uri
     private String uri;
+    //video coordinate
     private int coordinate;
 
     public VideoInfo() {

@@ -42,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
         progDialog = new ProgressDialog(LoginActivity.this);
+
+        //check email and passwd in Firebase
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,14 +56,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Check the Input Data", Toast.LENGTH_SHORT).show();
                 }
-/*
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-*/
             }
         });
-        btnJoin = (Button) findViewById(R.id.btnJoin);
+        //go to join
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,22 +76,12 @@ public class LoginActivity extends AppCompatActivity {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
-
-    private boolean isValidPasswd(String target) {
-        Pattern p = Pattern.compile("(^.*(?=.{6,100})(?=.*[0-9])(?=.*[a-zA-Z]).*$)");
-        Matcher m = p.matcher(target);
-        if (m.find() && !target.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    // Login
     private void signin(final String email, String password) {
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setMessage("Log in ....");
         progDialog.show();
-
+        //match checking email and password to firebase
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

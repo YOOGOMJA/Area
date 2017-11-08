@@ -3,6 +3,8 @@ build/
 openCVLibrary331/
 app/.externalNativeBuild/
 import-summary.txt
-.gradle
+.gradle/
 *.iml
 app/CMakeLists.txt
+Area.iml
+app/app.iml

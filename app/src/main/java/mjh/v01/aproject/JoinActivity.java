@@ -75,19 +75,21 @@ public class JoinActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         nicks = new ArrayList<String>();
 
-        if (mAuth.getCurrentUser() != null) {
+        /*if (mAuth.getCurrentUser() != null) {
             Log.d(TAG, "Current User:" + mAuth.getCurrentUser().getEmail());
-            // Go to Main Page
-//            GotoMainPage();
+//             Go to Main Page
+            GotoMainPage();
         } else {
             Log.d(TAG, "Log out State");
-        }
+        }*/
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 email = edtEmail.getText().toString().trim();
                 passwd = edtPasswd.getText().toString().trim();
                 Log.d(TAG, "Email:" + email + " Password:" + passwd);
+             //check email and passwd type
                 if (isValidEmail(email) && isValidPasswd(passwd)) {
                     createAccount(email, passwd);
                 } else {
@@ -100,6 +102,7 @@ public class JoinActivity extends AppCompatActivity {
         btnNickCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Check duplicate nicknames in FireBase
 
                 databaseReference.child("USER").child("NICKS").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -145,6 +148,7 @@ public class JoinActivity extends AppCompatActivity {
                 });
             }
         });
+        //insert user info to firebase database
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +161,7 @@ public class JoinActivity extends AppCompatActivity {
 //                    Map<String, Object> userValues = userInfo.toMap(null);
 //                    Map<String, Object> childUpdates = new HashMap<>();
                         getArray(nick);
+                        //replacing for save to firebase database
                         email_mod = email.replace(".", "_");
 //                    childUpdates.put("/USER/" +email_mod, userValues);
 //                    databaseReference.updateChildren(childUpdates);
@@ -176,7 +181,7 @@ public class JoinActivity extends AppCompatActivity {
     private void phoneCheck() {
 
     }
-
+    //password type
     private boolean isValidPasswd(String str) {
         if (str == null || TextUtils.isEmpty(str)) {
             return false;
@@ -187,7 +192,7 @@ public class JoinActivity extends AppCompatActivity {
                 return false;
         }
     }
-
+    //email type
     private boolean isValidEmail(String str) {
         if (str == null || TextUtils.isEmpty(str)) {
             return false;
@@ -195,7 +200,7 @@ public class JoinActivity extends AppCompatActivity {
             return Patterns.EMAIL_ADDRESS.matcher(str).matches();
         }
     }
-
+    //Create an account in FireBase Auth
     private void createAccount(String email, String passwd) {
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setMessage("Create User Account....");
@@ -246,7 +251,7 @@ public class JoinActivity extends AppCompatActivity {
                         });
 
     }
-
+    //finish Join
     private void GotoMainPage() {
         Intent intent = new Intent(JoinActivity.this, MainActivity.class);
         intent.putExtra("email",email);
@@ -254,7 +259,7 @@ public class JoinActivity extends AppCompatActivity {
         finish();
     }
 
-
+    //Add a nickname to the database for duplicate nicknames
     private void getArray(final String nick) {
         databaseReference.child("USER").child("NICKS").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

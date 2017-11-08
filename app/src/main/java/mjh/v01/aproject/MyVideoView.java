@@ -55,14 +55,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import mjh.v01.aproject.VO.VideoInfo;
 
-import static android.view.View.resolveSize;
 
 public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Callback{
 
     public static final String TAG = "MainActivity";
     private static String EXTERNAL_STORAGE_PATH = "";
     private static String RECORDED_FILE = "video_recorded";
-    private static int fileIndex = 0;
     private static String filename = "";
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
@@ -88,10 +86,6 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
     Uri videoUri;
     Camera mCamera;
     SurfaceView surface;
-    public List<Camera.Size> listPreviewSizes;
-    private Camera.Size previewSize;
-
-
 
 
     @Override
@@ -167,7 +161,7 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
                 values.put(MediaStore.MediaColumns.DATE_ADDED, System.currentTimeMillis() / 1000);
                 values.put(MediaStore.MediaColumns.MIME_TYPE, "mp4");
                 values.put(MediaStore.Audio.Media.DATA, filename);
-                // uri에 인서트 시켜준다
+                // insert to uri
                 videoUri = getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values);
                 if (videoUri == null) {
                     Log.d("SampleVideoRecorder", "Video insert failed.");
@@ -176,7 +170,7 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
                 }
                 Log.d("Whatisthis", videoUri.getLastPathSegment());
                 Toast.makeText(MyVideoView.this, "Success", Toast.LENGTH_SHORT).show();
-                //미디어 스캐너로 하여금 Uri에 대한 파일을 스캔하고 미디어 라이브러리에 파일을 추가하도록 해줍니다.
+                // Allow the media scanner to scan files for Uri and add files to the media library
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, videoUri));
             }
         });
@@ -189,7 +183,7 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
 
 
                 try {
-                    //경로에 있는 내 파일을 가져와서 실행시킨다
+                    //Take my file in the path and run it
                     FileInputStream fs = new FileInputStream(new File(filename));
                     FileDescriptor fd = fs.getFD();
                     player.setDataSource(fd);
@@ -253,6 +247,7 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
 
 
     private void checkDangerousPermissions() {
+
         String[] permissions = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -377,10 +372,10 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
                 mCamera  = Camera.open();
             }
 
-            // 카메라 설정
+            // setting camera
             Camera.Parameters parameters = mCamera .getParameters();
 
-            // 카메라의 회전이 가로/세로일때 화면을 설정한다.
+            // Set the camera's rotation horizontally and vertically.
             if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
                 parameters.set("orientation", "portrait");
                 mCamera.setDisplayOrientation(90);
@@ -396,10 +391,11 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
 
             mCamera.setPreviewDisplay(surfaceHolder);
 
-            // 카메라 미리보기를 시작한다.
+            // Start the camera preview.
+
             mCamera.startPreview();
 
-            // 자동포커스 설정
+            // autoFocus
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 public void onAutoFocus(boolean success, Camera camera) {
                     if (success) {
@@ -410,23 +406,24 @@ public class MyVideoView extends AppCompatActivity implements SurfaceHolder.Call
         } catch (IOException e) {
         }
     }
-    // SurfaceView 의 크기가 바뀌면 호출
+    // Called when the size of the SurfaceView changes
+
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int w, int h) {
 
-        // 카메라 화면을 회전 할 때의 처리
+        // Processing when rotating the camera screen
         if (surfaceHolder.getSurface() == null){
-            // 프리뷰가 존재하지 않을때
+            // When preview does not exist
             return;
         }
 
     }
 
-    // SurfaceView가 종료시 호출
+    //SurfaceView is called on exit
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         if(mCamera != null){
-            // 카메라 미리보기를 종료한다.
+            // Exit Camera preview
             mCamera.stopPreview();
             mCamera.release();
             mCamera = null;
